@@ -2,13 +2,13 @@
 "use strict";
 
 $(document).ready(function() {
-   var mapElem = document.getElementById('map');
+   var mapArea = document.getElementById('map');
    var center = {
       lat: 47.6,
       lng: -122.3
    };
 
-   var map = new google.maps.Map(mapElem, {
+   var map = new google.maps.Map(mapArea, {
       center: center,
       zoom: 12
    });
@@ -32,19 +32,27 @@ $(document).ready(function() {
             });
             markers.push(marker);
 
-            //shows a popup window when you click on a marker
             google.maps.event.addListener(marker, 'click', function onMarkerClick() {
                map.panTo(this.getPosition());
-               var image = '<p>' + location.cameralabel + '</p>' + '<img src= ' + location.imageurl.url + '>';
+               var image = '<p Hello: >' + location.cameralabel + '</p>' + '<img src= ' + location.imageurl.url + '>';
                infoWindow.setContent(image);
                infoWindow.open(map, this);
+               infoWindow.close(); 
             });
+            $('#search').bind('search find',function() {
+               var search=this.value.toLowerCase(); 
+               if(data.cameralabel.toLowerCase().indexOf(search)==-1) {
+                  marker.setMap(null); 
+               } else {
+                  marker.setMap(map); 
+               }
+            })
 
          });
       })
       
       .fail(function(error) {
-         console.log(error);
+         console.log("error");
       	})
       
       .always(function() {
