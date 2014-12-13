@@ -1,6 +1,5 @@
 // http://data.seattle.gov/resource/65fc-btcc.json
 "use strict";
-
 $(document).ready(function() {
    var mapArea = document.getElementById('map');
    var center = {
@@ -39,6 +38,7 @@ $(document).ready(function() {
                infoWindow.open(map, this);
                infoWindow.close(); 
             });
+
             $('#search').bind('search find',function() {
                var search=this.value.toLowerCase(); 
                if(data.cameralabel.toLowerCase().indexOf(search)==-1) {
@@ -54,7 +54,4 @@ $(document).ready(function() {
       .fail(function(error) {
          console.log("error");
       	})
-      
-      .always(function() {
-    	})
 });
